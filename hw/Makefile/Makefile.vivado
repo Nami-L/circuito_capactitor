@@ -80,7 +80,6 @@ XVLOG_FLAGS = -sv $(XVLOG_DEFINES) $(FILES) \
 XELAB_FLAGS = $(TEST) -debug all \
 							-s work.$(TEST) \
 							-mt 10 \
-							-timescale 1ns/100ps \
 							$(COV_FLAGS) \
 							-L work -L xil_defaultlib -L uvm \
 							-override_timeunit -override_timeprecision \

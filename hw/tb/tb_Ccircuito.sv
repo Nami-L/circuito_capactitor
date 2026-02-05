@@ -8,7 +8,7 @@ parameter real C = 100e-9; // Capacitance of 100 nF
   // Instanciamos el módulo
   circuio_c dut (
     .vout(vout),
-    .I(I),
+    .I_probe(I),
     .clk(clk)
   );
 
@@ -18,6 +18,11 @@ parameter real C = 100e-9; // Capacitance of 100 nF
   //  clk = 0;
   //  forever #2 clk = ~clk; // periodo de 2 ns
   //end
+
+  initial begin
+    // Formato: unidad (-9 = ns), decimales, sufijo, ancho mínimo
+    $timeformat(-9, 0, "", 10); 
+end
 
   // Estímulos para I
   initial begin
@@ -37,7 +42,7 @@ initial begin
     
     forever begin//@(posedge clk) begin // Cada que cambie una señal
         #(Ts*1s)
-        #0.01 $fdisplay(file, "%t,%f,%f", $realtime, I, vout); // se deja un delay pequeño para asegurar que los valores se hayan actualizado
+         $fdisplay(file, "%t,%f,%f", $realtime, I, vout); // se deja un delay pequeño para asegurar que los valores se hayan actualizado
     end
 end
 
