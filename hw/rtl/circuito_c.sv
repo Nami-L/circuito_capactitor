@@ -1,6 +1,6 @@
 // Descripcion de un cricuito simple con capacitancia
 
-`timescale 1ns/1ps
+//`timescale 1ns/1ps
 module circuio_c(vout,I,clk);
 output real vout;
 input real I;
@@ -23,7 +23,8 @@ initial begin
     i_prev= 0.0;
 end
 
-always @(posedge clk) begin // el reloj controla la actualizacion del voltaje y es de 2 ns abajo y 2 ns arriba
+always begin//@(posedge clk) begin // el reloj controla la actualizacion del voltaje y es de 2 ns abajo y 2 ns arriba
+    #(TS*1s);
     // calcular el nuevo voltaje v[t] = v[t-1] + (i[t] + i[t-1] ) / 2*f*C
     vout = v_prev + (I + i_prev) / (2.0 * f * C);
 

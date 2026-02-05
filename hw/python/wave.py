@@ -13,7 +13,7 @@ current = df['i'] * 1e6
 plt.figure(figsize=(10, 5)) #crear una figura de 10x5 pulgadas
 
 plt.plot(time,vout, label='Vout (RNM Model)') #graficar vout vs tiempo
-plt.title('Respuesta del Fotodiodo')
+plt.title('Respuesta del Capactiro')
 plt.xlabel('Tiempo [ns]')
 plt.ylabel('Voltaje [mV]')
 plt.grid(True)

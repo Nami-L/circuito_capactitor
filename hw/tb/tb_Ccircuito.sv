@@ -1,9 +1,10 @@
-`timescale 1ns/1ps
+//`timescale 1ns/1ps
 module tb_Ccircuito;
   real I;
   real vout;
   logic clk;
-
+parameter real Ts = 4e-9; // Time step of 4 ns
+parameter real C = 100e-9; // Capacitance of 100 nF
   // Instanciamos el módulo
   circuio_c dut (
     .vout(vout),
@@ -13,10 +14,10 @@ module tb_Ccircuito;
 
 
   // Generación del reloj de muestreo
-  initial begin
-    clk = 0;
-    forever #2 clk = ~clk; // periodo de 2 ns
-  end
+  //initial begin
+  //  clk = 0;
+  //  forever #2 clk = ~clk; // periodo de 2 ns
+  //end
 
   // Estímulos para I
   initial begin
@@ -34,7 +35,8 @@ initial begin
     file = $fopen("simulation_results.csv", "w");
     $fdisplay(file, "time,i,vout"); // Encabezado
     
-    forever @(posedge clk) begin // Cada que cambie una señal
+    forever begin//@(posedge clk) begin // Cada que cambie una señal
+        #(Ts*1s)
         #0.01 $fdisplay(file, "%t,%f,%f", $realtime, I, vout); // se deja un delay pequeño para asegurar que los valores se hayan actualizado
     end
 end
